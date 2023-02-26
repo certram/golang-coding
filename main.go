@@ -2,16 +2,19 @@
  * @Author: certram
  * @Date: 2023-02-23 15:25:19
  * @LastEditors: certram
- * @LastEditTime: 2023-02-23 15:29:37
+ * @LastEditTime: 2023-02-24 00:47:28
  */
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	s1 "github.com/certram/golang-coding/string"
+)
 
 func main() {
-	tm := map[int]int{1: 1, 2: 4, 3: 9, 4: 16}
-	fmt.Println(tm[1])
-	fmt.Println(tm[4])
-	fmt.Println(tm[9])
+	s := "fedywewd"
+	n := s1.LengthOfLongestSubstring2(s)
 
+	fmt.Println(n)
 }

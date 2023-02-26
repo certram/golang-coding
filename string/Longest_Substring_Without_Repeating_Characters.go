@@ -1,18 +1,20 @@
+package string
+
 /*
  * @Author: certram
  * @Date: 2023-02-23 15:02:24
  * @LastEditors: certram
- * @LastEditTime: 2023-02-23 15:48:59
+ * @LastEditTime: 2023-02-24 00:42:47
  */
-package string
 
+//LeetCode第三题
 /**
  * @funcname: lengthOfLongestSubstring
  * @description:
  * @param {string} s
  * @return {int}，返回最长子串的length
  */
-func lengthOfLongestSubstring(s string) int {
+func LengthOfLongestSubstring1(s string) int {
 	//res记录最大的length，也是返回的结果
 	p, res := -1, 0
 	//声明一个临时map结构来标记一个字符是否出现过了。key是字符,value是代表是否出现过，可以是bool类型，我这里设置规则：value为0代表没出现过，为1代表出现过
@@ -34,6 +36,28 @@ func lengthOfLongestSubstring(s string) int {
 		//经历for循环之后，p+1到达的位置：必然是以i开头的子串的第一个重复的字符的index,p就是这个子串的最后一个字符。
 		//举例子，i在0位置，字符串s="pwdecccds",当p+1=5时，map里面c字符出现过了，不符合for循环条件，退出for。以0位置开始的不重复子串长度是：p-i+1
 		res = max(res, p-i+1)
+	}
+	return res
+}
+
+// 解法2:位图
+func LengthOfLongestSubstring2(s string) int {
+	if len(s) == 0 {
+		return 0
+	}
+	var bitSet [256]bool
+
+	res, l, r := 0, 0, 0
+	for l < len(s) {
+		if r < len(s) && bitSet[s[r]] == false {
+			bitSet[s[r]] = true
+			r++
+		} else {
+			bitSet[s[l]] = false
+			l++
+
+		}
+		res = max(res, r-l)
 	}
 	return res
 }
